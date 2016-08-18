@@ -1,9 +1,9 @@
-from google.appengine.ext import nbd
-import model
+from flask.ext import wtf
+import wtforms
 
-class Contact(model.Base):
-	user_key = nbd.KeyProperty(kind=model.User,required=True)
-	name = nbd.StringProperty(required=True)
-	email = nbd.StringProperty(default='')
-	phone = nbd.StringProperty(default='')
-	address = nbd.StringProperty(default='')
+class ContactUpdateForm(wtf.Form):
+	name = wtforms.StringField('Name', [wtforms.validators.required()])		
+	email = wtforms.StringField('Email', [wtforms.validators.optional(), 
+				wtforms.validators.email()])		
+	phone = wtforms.StringField('Phone', [wtforms.validators.optional()])		
+	address = wtforms.TextAreaField('Address', [wtforms.validators.optional()])		
